@@ -124,29 +124,29 @@ type BuildFile interface {
 }
 
 type buildFile struct {
-	daemon *Daemon
-	eng    *engine.Engine
+	daemon *Daemon        //Job所属daemon
+	eng    *engine.Engine //Job所属engine
 
-	image      string
-	maintainer string
-	config     *runconfig.Config
+	image      string            //基础镜像
+	maintainer string            //Docker维护者
+	config     *runconfig.Config //运行配置参数
 
-	contextPath string
-	context     *tarsum.TarSum
+	contextPath string         //context所在路径
+	context     *tarsum.TarSum //context内容
 
-	verbose      bool
-	utilizeCache bool
-	rm           bool
-	forceRm      bool
+	verbose      bool //输出build
+	utilizeCache bool //使用镜像缓存
+	rm           bool //删除中间容器
+	forceRm      bool //强制删除中间容器
 
-	authConfig *registry.AuthConfig
-	configFile *registry.ConfigFile
+	authConfig *registry.AuthConfig //认证信息
+	configFile *registry.ConfigFile //配置文件
 
-	tmpContainers map[string]struct{}
-	tmpImages     map[string]struct{}
+	tmpContainers map[string]struct{} //临时容器列表
+	tmpImages     map[string]struct{} //临时镜像列表
 
-	outStream io.Writer
-	errStream io.Writer
+	outStream io.Writer //输出流
+	errStream io.Writer //输入流
 
 	// Deprecated, original writer used for ImagePull. To be removed.
 	outOld io.Writer

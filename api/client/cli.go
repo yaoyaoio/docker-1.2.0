@@ -50,14 +50,14 @@ func (cli *DockerCli) getMethod(name string) (func(...string) error, bool) {
 // Cmd executes the specified command
 func (cli *DockerCli) Cmd(args ...string) error {
 	if len(args) > 0 {
-		method, exists := cli.getMethod(args[0])
+		method, exists := cli.getMethod(args[0]) //找到对应方法
 		if !exists {
 			fmt.Println("Error: Command not found:", args[0])
-			return cli.CmdHelp(args[1:]...)
+			return cli.CmdHelp(args[1:]...) //打印帮助
 		}
-		return method(args[1:]...)
+		return method(args[1:]...) //将后续args加入方法里
 	}
-	return cli.CmdHelp(args...)
+	return cli.CmdHelp(args...) //打印帮助
 }
 
 func (cli *DockerCli) Subcmd(name, signature, description string) *flag.FlagSet {

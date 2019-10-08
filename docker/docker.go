@@ -31,7 +31,7 @@ func main() {
 	// FIXME: validate daemon flags here
 
 	if *flVersion {
-		showVersion()
+		showVersion() //打印版本
 		return
 	}
 	if *flDebug {
@@ -50,7 +50,7 @@ func main() {
 		flHosts = append(flHosts, defaultHost)
 	}
 
-	if *flDaemon {
+	if *flDaemon { //如果是daemon 就启动daemon 反之 返回一个client
 		mainDaemon()
 		return
 	}
